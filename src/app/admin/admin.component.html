@@ -1,0 +1,82 @@
+<br/>
+<br/>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToHome()">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Admin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" [routerLink]="['/login']">Logout</a>
+    </li>
+  </ul>
+  <div class="jumbotron">
+    <h1 class="display-5 text-center">Administration</h1>
+    <p>Hi, {{currentUser.username}}! </p>
+    <br/>
+    <label>Choose user:  </label>
+    <select class="dropdown-primary" (change)="chooseUser($event.target.value)">
+      <option value="">--choose--</option>
+      <option *ngFor="let user of users" value={{user.username}}>
+        {{user.username}}
+      </option>
+    </select>
+    <br/>
+    <label>Choose competition:  </label>
+    <select class="dropdown-primary" (change)="chooseCompetition($event.target.value)">
+      <option value="">--choose--</option>
+      <option *ngFor="let competition of competitions" value={{competition.id}}>
+        {{competition.details}}
+      </option>
+    </select>
+    <br/>
+    <button (click)="addUserToCompetition(this.username, this.competitionId)">Add user to competition</button>
+    <br/>
+    <table class="table table-striped" [mfData]="matches" #mf="mfDataTable">
+      <thead>
+      <tr>
+        <th style="width: 20%">
+          <mfDefaultSorter by="team1">Home</mfDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <mfDefaultSorter by="team2">Away</mfDefaultSorter>
+        </th>
+        <th style="width: 5%">
+          <mfDefaultSorter by="team1Goals"></mfDefaultSorter>
+        </th>
+        <th style="width: 5%">
+          <mfDefaultSorter by="team2Goals"></mfDefaultSorter>
+        </th>
+        <th style="width: 30%">
+          <mfDefaultSorter by="matchTime">Match Time</mfDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <mfDefaultSorter by="finalResult"></mfDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let match of matches">
+        <td>{{match.team1}}</td>
+        <td>{{match.team2}}</td>
+        <td>
+          <input style="width : 50px;" [(ngModel)]="match.team1GoalsResult">
+        </td>
+        <td>
+          <input style="width : 50px;" [(ngModel)]="match.team2GoalsResult">
+        </td>
+        <td>{{match.matchTime | date:'MMM d, y - H:mm'}}</td>
+        <td>
+          <button (click)="addResult(match, match.team1GoalsResult, match.team2GoalsResult)">Confirm final result
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+

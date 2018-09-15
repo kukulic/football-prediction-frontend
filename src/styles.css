@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-image: url('/assets/img/football-background.jpg');
+}
+
+.nav-pills {
+  background-color: skyblue;
+}
+
+.desktop-table {
+  display: unset;
+}
+.mobile-table {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .desktop-table {
+    display: none;
+  }
+  .mobile-table {
+    display: unset;
+  }
+}
+@media only screen and (max-width: 991px) and (min-width: 769px){
+  .desktop-table {
+    display: unset;
+  }
+
+  .mobile-table {
+    display: none;
+  }
+
+  .match-time-head {
+    display: none;
+  }
+
+  .match-time-body {
+    display: none;
+  }
+}
+

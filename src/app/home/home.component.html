@@ -1,0 +1,29 @@
+<br/>
+<br/>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="currentUser.role == 'admin'" (click)="goToAdmin()">Admin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" [routerLink]="['/login']">Logout</a>
+    </li>
+  </ul>
+  <div class="jumbotron">
+    <div>
+      <h1 class="display-5 text-center">Predict football results</h1>
+      <p>Hi, {{currentUser.username}}!</p>
+      <label>Choose your competition:  </label>
+      <select class="dropdown-primary" (change)="chooseCompetition($event.target.value)">
+        <option value="">--choose--</option>
+        <option *ngFor="let competition of competitions" value={{competition.id}}>
+          {{competition.details}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+

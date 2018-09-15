@@ -1,0 +1,158 @@
+<br/>
+<br/>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToHome()">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="currentUser.role == 'admin'" (click)="goToAdmin()">Admin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" (click)="goToPrediction(competitionId)">Prediction</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToHistory(competitionId)">History</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToRanking(competitionId)">Ranking</a>
+    </li>
+    <li class="nav-item" style="float: right;" >
+      <a class="nav-link disabled" [routerLink]="['/login']">Logout</a>
+    </li>
+  </ul>
+  <div class="jumbotron">
+    <h1 class="display-5 text-center">Prediction</h1>
+    <p>Hi, {{currentUser.username}}!</p>
+    <div class="mobile-table">
+    <table class="table table-striped" [mfData]="matches" #mf="mfDataTable">
+      <tbody>
+      <td *ngFor="let match of matches" style="display: block;">
+        <tr >
+          <td style="width: 220px">{{match.team1}}</td>
+          <td style="width: 50px">{{match.team1GoalsPrediction}}</td>
+          <td style="width: 100px">
+            <input style="width : 50px;" [(ngModel)]="match.team1GoalsResult">
+          </td>
+        </tr>
+        <tr>
+          <td>{{match.team2}}</td>
+          <td>{{match.team2GoalsPrediction}}</td>
+          <td>
+            <input style="width : 50px;" [(ngModel)]= "match.team2GoalsResult">
+          </td>
+        </tr>
+        <tr >
+          <td></td>
+          <td></td>
+          <td>
+          <button (click)="addResult(match, match.team1GoalsResult, match.team2GoalsResult)">Predict</button>
+          </td>
+        </tr>
+      </td>
+      </tbody>
+    </table>
+    </div>
+    <div class="desktop-table">
+    <table class="table table-striped" [mfData]="matches" #mf="mfDataTable">
+      <thead>
+      <tr>
+        <th >
+          <mfDefaultSorter by="team1">Home</mfDefaultSorter>
+        </th>
+        <th >
+          <mfDefaultSorter by="team2">Away</mfDefaultSorter>
+        </th>
+        <th >
+          <mfDefaultSorter by="team1GoalsPrediction"></mfDefaultSorter>
+        </th>
+        <th >
+          <mfDefaultSorter by="team2GoalsPrediction"></mfDefaultSorter>
+        </th>
+        <th >
+          <mfDefaultSorter by="team1Goals"></mfDefaultSorter>
+        </th>
+        <th >
+          <mfDefaultSorter by="team2Goals"></mfDefaultSorter>
+        </th>
+        <th class="match-time-head">
+          <mfDefaultSorter by="matchTime">Match Time</mfDefaultSorter>
+        </th>
+        <th >
+          <mfDefaultSorter by="predict"></mfDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let match of matches" >
+        <td>{{match.team1}}</td>
+        <td>{{match.team2}}</td>
+        <td>{{match.team1GoalsPrediction}}</td>
+        <td>{{match.team2GoalsPrediction}}</td>
+        <td>
+          <input style="width : 50px;" [(ngModel)]="match.team1GoalsResult">
+        </td>
+        <td>
+          <input style="width : 50px;" [(ngModel)]= "match.team2GoalsResult">
+        </td>
+        <td class="match-time-body">{{match.matchTime | date:'MMM d, y - H:mm'}}</td>
+        <td>
+          <button (click)="addResult(match, match.team1GoalsResult, match.team2GoalsResult)">Predict</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+<!--
+<table class="table table-striped" [mfData]="matches" #mf="mfDataTable">
+  <thead>
+  <tr style="display: block;">
+    <th >
+      <mfDefaultSorter by="team1">Home</mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="team2">Away</mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="team1GoalsPrediction"></mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="team2GoalsPrediction"></mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="team1Goals"></mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="team2Goals"></mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="matchTima">Match Time</mfDefaultSorter>
+    </th>
+    <th >
+      <mfDefaultSorter by="predict"></mfDefaultSorter>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let match of matches" style="display: block;">
+    <td>{{match.team1}}</td>
+    <td>{{match.team2}}</td>
+    <td>{{match.team1GoalsPrediction}}</td>
+    <td>{{match.team2GoalsPrediction}}</td>
+    <td>
+      <input style="width : 50px;" [(ngModel)]="match.team1GoalsResult">
+    </td>
+    <td>
+      <input style="width : 50px;" [(ngModel)]= "match.team2GoalsResult">
+    </td>
+      <td>{{match.matchTime | date:'MMM d, y - H:mm'}}</td>
+    <td>
+      <button (click)="addResult(match, match.team1GoalsResult, match.team2GoalsResult)">Predict</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+-->

@@ -1,0 +1,67 @@
+<br/>
+<br/>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToHome()">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="currentUser.role == 'admin'" (click)="goToAdmin()">Admin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToPrediction(competitionId)">Prediction</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" (click)="goToHistory(competitionId)">History</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToRanking(competitionId)">Ranking</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" [routerLink]="['/login']">Logout</a>
+    </li>
+  </ul>
+  <div class="jumbotron">
+    <h1 class="display-5 text-center">History</h1>
+    <p>Hi, {{currentUser.username}}!</p>
+    <table class="table table-striped" [mfData]="matches" #mf="mfDataTable">
+      <thead>
+      <tr>
+        <th style="width: 20%">
+          <mfDefaultSorter by="team1">Home</mfDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <mfDefaultSorter by="team2">Away</mfDefaultSorter>
+        </th>
+        <th style="width: 10%">
+          <mfDefaultSorter by="team1GoalsPrediction"></mfDefaultSorter>
+        </th>
+        <th style="width: 10%">
+          <mfDefaultSorter by="team2GoalsPrediction"></mfDefaultSorter>
+        </th>
+        <th style="width: 4%">
+          <mfDefaultSorter by="team1GoalsResult"></mfDefaultSorter>
+        </th>
+        <th style="width: 20%">
+          <mfDefaultSorter by="team2GoalsResult"></mfDefaultSorter>
+        </th>
+        <th style="width: 22%">
+          <mfDefaultSorter by="userScore">Score</mfDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let match of matches">
+        <td>{{match.team1}}</td>
+        <td>{{match.team2}}</td>
+        <td>{{match.team1GoalsPrediction}} : {{match.team2GoalsPrediction}}</td>
+        <td>{{match.team2GoalsPrediction}}</td>
+        <td>{{match.team1GoalsResult}}</td>
+        <td>{{match.team2GoalsResult}}</td>
+        <td>{{match.userScore}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

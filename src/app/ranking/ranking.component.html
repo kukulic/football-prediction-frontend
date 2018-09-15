@@ -1,0 +1,47 @@
+<br/>
+<br/>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToHome()">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="currentUser.role == 'admin'" (click)="goToAdmin()">Admin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToPrediction(competitionId)">Prediction</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="goToHistory(competitionId)">History</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" (click)="goToRanking(competitionId)">Ranking</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" [routerLink]="['/login']">Logout</a>
+    </li>
+  </ul>
+  <div class="jumbotron">
+    <h1 class="display-5 text-center">Ranking</h1>
+    <p>Hi, {{currentUser.username}}!</p>
+    <table class="table table-striped" [mfData]="ranking" #mf="mfDataTable">
+      <thead>
+      <tr>
+        <th style="width: 30%">
+          <mfDefaultSorter by="team1">Player</mfDefaultSorter>
+        </th>
+        <th style="width: 30%">
+          <mfDefaultSorter by="team2">Score</mfDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let rank of ranking">
+        <td>{{rank.username}}</td>
+        <td>{{rank.score}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
