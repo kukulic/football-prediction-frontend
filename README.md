@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PredictionFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
@@ -25,3 +26,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+=======
+# football-prediction-frontend
+>>>>>>> 21d1f7a9bca047b527e5cfbdf8b8003f10da89ec
